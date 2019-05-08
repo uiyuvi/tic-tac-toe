@@ -1,7 +1,11 @@
 var PLAYERS = require('../constants/players');
+var GAME_STATUS = require('../constants/gameStatus');
+
 var GamePresenter = function(view){
     var currentPlayer = PLAYERS.X;
     var board = [[],[],[]];
+    var winner;
+    var status = GAME_STATUS.IN_PROGRESS;
     view.updatePlayer(currentPlayer);
 
     this.currentPlayer = function (){
@@ -18,7 +22,25 @@ var GamePresenter = function(view){
         }
         
         registerMoveInBoard(row,column);
+
+        if(isWon()){
+            winner = currentPlayer;
+            status = this.status();
+            return;
+        } 
         togglePlayer();        
+    }   
+
+    this.winner = function(){
+        return winner;
+    }
+
+    this.status = function(){
+        if(this.winner()){
+            status = GAME_STATUS.WON
+            view.handleWon();
+        }
+        return status;
     }
 
     isPlayedPosition = function(row, column) {
@@ -33,6 +55,27 @@ var GamePresenter = function(view){
     togglePlayer = function(){
         currentPlayer = (currentPlayer === PLAYERS.X) ? PLAYERS.O : PLAYERS.X;
         view.updatePlayer(currentPlayer);
+    }
+
+    isWon = function(){
+        var sumOfMatchedMoveInRow;
+
+        for(var row = 0; row <= board.length-1 ; row++){
+            sumOfMatchedMoveInRow =0;
+            for(var column = 0; column <= board.length-1; column++){
+                if(checkInRow(row, column)){
+                    sumOfMatchedMoveInRow++;
+                }
+
+                if(sumOfMatchedMoveInRow === board.length){                   
+                    return true;
+                }
+            }
+        }        
+    }
+
+    checkInRow = function(row,column){
+        return isPlayedPosition(row,column) && board[row][column] === currentPlayer;
     }
 }
 

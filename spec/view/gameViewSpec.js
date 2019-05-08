@@ -25,4 +25,14 @@ describe('Tic Tac Toe game view', function(){
 
         expect(document.querySelector('#row' + row + ' .column' + column).innerHTML).toBe(PLAYERS.O);
     });
+
+    it('should display winner', function(){
+        var gameView = new GameView();
+        const dom = new JSDOM(`<!DOCTYPE html><div class="win">Hello world</div>`);
+        document = dom.window.document;
+
+        gameView.handleWon();
+
+        expect(document.querySelector('.win').classList.contains('show')).toBeTruthy();
+    });
 })

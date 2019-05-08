@@ -1,9 +1,10 @@
 var Game = require('../../src/presenter/gamePresenter');
 var PLAYERS = require('../../src/constants/players');
+var GAME_STATUS = require('../../src/constants/gameStatus');
 
 describe('Tic tac toe game presenter', function(){
     var game;
-    var view = jasmine.createSpyObj(view,['updatePlayer','updateBoard']);    
+    var view = jasmine.createSpyObj(view,['updatePlayer','updateBoard','handleWon']);    
     var playerX = {
         move: function(row,column){
             game.move(row,column);
@@ -14,7 +15,7 @@ describe('Tic tac toe game presenter', function(){
             game.move(row,column);
         }
     };
-    
+
     beforeEach(function(){               
         game = new Game(view);  
     })
@@ -54,5 +55,20 @@ describe('Tic tac toe game presenter', function(){
 
         expect(view.updateBoard).not.toHaveBeenCalledWith([inValidMove.row+1,inValidMove.column+1,PLAYERS.O]);
         expect(game.currentPlayer()).toBe(PLAYERS.O);
+    });
+
+    it('should declare win if player draws all three in a row', function(){
+        view.updateBoard.calls.reset();
+
+        playerX.move(0,0);
+        playerO.move(1,0);
+        playerX.move(0,1);
+        playerO.move(2,0);
+        playerX.move(0,2);
+
+        expect(view.updateBoard.calls.count()).toEqual(5);
+        expect(view.handleWon).toHaveBeenCalled();
+        expect(game.winner()).toBe(PLAYERS.X);
+        expect(game.status()).toBe(GAME_STATUS.WON);
     });
 })
