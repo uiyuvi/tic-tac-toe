@@ -1,0 +1,23 @@
+{
+  "name": "tic-tac-toe",
+  "version": "1.0.0",
+  "description": "Tic-Tac-Toe game developed using TDD approach",
+  "main": "index.js",
+  "scripts": {
+    "test": "jasmine",
+    "start": "webpack-dev-server --open",
+    "build": "webpack --config webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/2019-SOW-DEV-011/tic-tac-toe.git"
+  },
+  "author": "2019-SOW-DEV-011",
+  "license": "ISC",
+  "devDependencies": {
+    "jasmine": "^3.3.1",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.2.1"
+  }
+}
