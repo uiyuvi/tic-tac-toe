@@ -71,4 +71,17 @@ describe('Tic tac toe game presenter', function(){
         expect(game.winner()).toBe(PLAYERS.X);
         expect(game.status()).toBe(GAME_STATUS.WON);
     });
+
+    it('should not allow player to play once game is declared win', function(){
+        view.updateBoard.calls.reset();
+
+        playerX.move(0,0);
+        playerO.move(1,0);
+        playerX.move(0,1);
+        playerO.move(2,0);
+        playerX.move(0,2);
+        playerO.move(2,1);
+
+        expect(view.updateBoard.calls.count()).not.toEqual(6);
+    });
 })

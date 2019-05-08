@@ -17,7 +17,7 @@ var GamePresenter = function(view){
             return;
         }
 
-        if(isPlayedPosition(row, column)){
+        if(isGameOver() || isPlayedPosition(row, column)){
             return;
         }
         
@@ -45,6 +45,10 @@ var GamePresenter = function(view){
 
     isPlayedPosition = function(row, column) {
         return typeof board[row][column] !== 'undefined';
+    }
+    
+    isGameOver = function() {
+        return status === GAME_STATUS.WON;
     }
 
     registerMoveInBoard = function(row,column){
