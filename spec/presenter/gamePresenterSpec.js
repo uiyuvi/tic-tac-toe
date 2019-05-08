@@ -35,4 +35,17 @@ describe('Tic tac toe game presenter', function(){
 
         expect(game.currentPlayer()).toBe(PLAYERS.X);
     });
+
+    
+
+    it('should not allow to play on played position', function(){
+        spyOn(view,'updateBoard').and.callThrough();
+        var game = new Game(view);
+
+        game.move(0,0);
+        game.move(0,0);
+
+        expect(view.updateBoard).not.toHaveBeenCalledWith([1,1,PLAYERS.O]);
+        expect(game.currentPlayer()).toBe(PLAYERS.O);
+    });
 })

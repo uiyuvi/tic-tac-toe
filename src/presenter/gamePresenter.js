@@ -11,10 +11,18 @@ var GamePresenter = function(view){
     this.move = function (row,column){
         if(isNaN(row) || isNaN(column)){
             return;
-        } 
+        }
+
+        if(isPlayedPosition(row, column)){
+            return;
+        }
         
         registerMoveInBoard(row,column);
         togglePlayer();        
+    }
+
+    isPlayedPosition = function(row, column) {
+        return typeof board[row][column] !== 'undefined';
     }
 
     registerMoveInBoard = function(row,column){
