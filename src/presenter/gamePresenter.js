@@ -9,7 +9,7 @@ var GamePresenter = function(view){
     }
 
     this.move = function (row,column){
-        if(isNaN(row) || isNaN(column) || typeof board[row][column] === undefined){
+        if(isNaN(row) || isNaN(column)){
             return;
         } 
         
@@ -24,6 +24,7 @@ var GamePresenter = function(view){
 
     togglePlayer = function(){
         currentPlayer = (currentPlayer === PLAYERS.X) ? PLAYERS.O : PLAYERS.X;
+        view.updatePlayer(currentPlayer);
     }
 }
 

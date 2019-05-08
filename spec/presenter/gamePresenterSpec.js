@@ -18,12 +18,14 @@ describe('Tic tac toe game presenter', function(){
 
     it('Should switch player and register in board after a valid turn', function(){        
         spyOn(view,'updateBoard');
+        spyOn(view,'updatePlayer');
         var game = new Game(view);
 
         game.move(0,0);
 
         expect(game.currentPlayer()).toBe(PLAYERS.O);
         expect(view.updateBoard).toHaveBeenCalledWith(1,1,PLAYERS.X);
+        expect(view.updatePlayer).toHaveBeenCalledWith(PLAYERS.O)
     });
 
     it('Should not switch player after a invalid turn', function(){
