@@ -14,8 +14,10 @@ var lastCharacter = function(string){
     return string.slice(-1);
 }
 
-document.querySelectorAll('.row span').forEach((position) => {
-    position.addEventListener('click', function (event) {
+const positions = document.querySelectorAll('.row span');
+for(var position = 0;position <= positions.length; position++){
+    positions[position].addEventListener('click', function (event) {
         makeMove(event);
     })
-});
+};
+
