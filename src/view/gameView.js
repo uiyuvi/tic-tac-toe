@@ -1,19 +1,27 @@
 var GameView = function(){
     this.updatePlayer = function(player){
-        document.getElementById('currentPlayer').innerHTML = player;
+        render('#currentPlayer', player);
     }
 
-    this.updateBoard =function (row, column, player) {
-        document.querySelector('#row' + row + ' .column' + column).innerHTML = player;
+    this.updateBoard = function (row, column, player) {
+        render('#row' + row + ' .column' + column, player);        
     }
 
     this.handleWon = function () {
-        document.querySelector('.win').classList.add('show');
+        addClass('.win','show');
+    }
+    
+    this.handleDraw = function(){
+        addClass('.draw','show');
+        addClass('.playerTurn','hide');
+    }
+    
+    var addClass = function(selector, className){
+        document.querySelector(selector).classList.add(className);
     }
 
-    this.handleDraw = function(){
-        document.querySelector('.draw').classList.add('show');
-        document.querySelector('.playerTurn').classList.add('hide');
+    var render = function (selector, value){
+        document.querySelector(selector).innerHTML = value;
     }
 
 }
