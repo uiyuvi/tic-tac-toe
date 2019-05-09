@@ -5,6 +5,7 @@ var GamePresenter = function(view){
     var currentPlayer = PLAYERS.X;
     var board = [[],[],[]];
     var winner;
+    var moves = 0;
     var status = GAME_STATUS.IN_PROGRESS;
     view.updatePlayer(currentPlayer);
 
@@ -21,13 +22,15 @@ var GamePresenter = function(view){
             return;
         }
         
-        registerMoveInBoard(row,column);
+        approveMove(row,column);
 
         if(isWon()){
             winner = currentPlayer;
             status = this.status();
             return;
-        } 
+        }
+
+        status = this.status();
         togglePlayer();        
     }   
 
@@ -39,8 +42,15 @@ var GamePresenter = function(view){
         if(this.winner()){
             status = GAME_STATUS.WON
             view.handleWon();
+        } else if(isMovesExpired()){
+            status = GAME_STATUS.DRAW;
+            view.handleDraw();
         }
         return status;
+    }
+    
+    isMovesExpired = function(){
+        return moves === board.length * board.length;
     }
 
     isPlayedPosition = function(row, column) {
@@ -48,7 +58,12 @@ var GamePresenter = function(view){
     }
     
     isGameOver = function() {
-        return status === GAME_STATUS.WON;
+        return status !== GAME_STATUS.IN_PROGRESS;
+    }
+
+    approveMove = function(row,column){
+        moves++;
+        registerMoveInBoard(row,column);
     }
 
     registerMoveInBoard = function(row,column){
@@ -93,7 +108,7 @@ var GamePresenter = function(view){
             }
         }        
     }
-    
+
     isCurrentPlayerPlayedOn  = function(row, column) {
         return board[row][column] === currentPlayer;
     }

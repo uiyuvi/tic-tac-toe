@@ -4,7 +4,7 @@ var GAME_STATUS = require('../../src/constants/gameStatus');
 
 describe('Tic tac toe game presenter', function(){
     var game;
-    var view = jasmine.createSpyObj(view,['updatePlayer','updateBoard','handleWon']);    
+    var view = jasmine.createSpyObj(view,['updatePlayer','updateBoard','handleWon','handleDraw']);    
     var playerX = {
         move: function(row,column){
             game.move(row,column);
@@ -133,5 +133,24 @@ describe('Tic tac toe game presenter', function(){
         expect(view.updateBoard.calls.mostRecent().args).toEqual([lastMove.row,lastMove.column,PLAYERS.X]);
         expect(view.handleWon).toHaveBeenCalled();
         expect(game.status()).toBe(GAME_STATUS.WON);
+    });
+    
+
+    it('should declare draw if all squares are filled and neither of players are won ', function(){
+        view.updateBoard.calls.reset();
+
+        playerX.move(0,2);
+        playerO.move(2,2);
+        playerX.move(0,0);
+        playerO.move(0,1);
+        playerX.move(1,0);
+        playerO.move(1,1);
+        playerX.move(2,1);
+        playerO.move(2,0);
+        playerX.move(1,2);
+
+        expect(game.status()).toBe(GAME_STATUS.DRAW);
+        expect(view.updateBoard.calls.count()).toEqual(9);
+        expect(view.handleDraw).toHaveBeenCalled();
     });
 })

@@ -34,4 +34,13 @@ describe('Tic Tac Toe game view', function(){
 
         expect(document.querySelector('.win').classList.contains('show')).toBeTruthy();
     });
+
+    it('should display game is draw', function(){
+        render(`<!DOCTYPE html><div class="draw">Hello world</div><div class="playerTurn">Hello world</div>`);
+
+        view.handleDraw();
+
+        expect(document.querySelector('.draw').classList.contains('show')).toBeTruthy();
+        expect(document.querySelector('.playerTurn').classList.contains('hide')).toBeTruthy();
+    });
 })

@@ -10,6 +10,12 @@ var GameView = function(){
     this.handleWon = function () {
         document.querySelector('.win').classList.add('show');
     }
+
+    this.handleDraw = function(){
+        document.querySelector('.draw').classList.add('show');
+        document.querySelector('.playerTurn').classList.add('hide');
+    }
+
 }
 
 module.exports  = GameView;
