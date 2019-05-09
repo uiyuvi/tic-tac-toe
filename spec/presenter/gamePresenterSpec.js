@@ -114,4 +114,24 @@ describe('Tic tac toe game presenter', function(){
         expect(view.handleWon).toHaveBeenCalled();
         expect(game.status()).toBe(GAME_STATUS.WON);
     });
+
+    it('should declare win if player draws all three in a diagonal from right to left', function(){
+        view.updateBoard.calls.reset();
+        var lastMove = {
+            row: 2,
+            column : 0
+        }
+
+        playerX.move(0,2);
+        playerO.move(1,0);
+        playerX.move(1,1);
+        playerO.move(2,1);
+        playerX.move(lastMove.row,lastMove.column);
+
+        expect(game.winner()).toBe(PLAYERS.X);
+        expect(view.updateBoard.calls.count()).toEqual(5);
+        expect(view.updateBoard.calls.mostRecent().args).toEqual([lastMove.row,lastMove.column,PLAYERS.X]);
+        expect(view.handleWon).toHaveBeenCalled();
+        expect(game.status()).toBe(GAME_STATUS.WON);
+    });
 })
