@@ -65,10 +65,10 @@ var GamePresenter = function(view){
         var sumOfMatchedMovesInRow,
         sumofMatchedMovesInColumn;
 
-        for(var row = 0; row <= board.length-1 ; row++){
+        for(var row = 0; row < board.length ; row++){
             sumOfMatchedMovesInRow = 0;
             sumofMatchedMovesInColumn = 0;
-            for(var column = 0; column <= board.length-1; column++){
+            for(var column = 0; column < board.length; column++){
                 if(isMatchFoundInRow(row, column)){
                     sumOfMatchedMovesInRow++;
                 }
