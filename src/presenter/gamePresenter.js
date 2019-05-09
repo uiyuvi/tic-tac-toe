@@ -53,7 +53,7 @@ var GamePresenter = function(view){
 
     registerMoveInBoard = function(row,column){
         board[row][column] = currentPlayer;        
-        view.updateBoard(row+1,column+1,currentPlayer);
+        view.updateBoard(row,column,currentPlayer);
     }
 
     togglePlayer = function(){

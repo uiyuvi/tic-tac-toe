@@ -34,7 +34,7 @@ describe('Tic tac toe game presenter', function(){
         playerX.move(validMove.row,validMove.column);
 
         expect(game.currentPlayer()).toBe(PLAYERS.O);
-        expect(view.updateBoard).toHaveBeenCalledWith(validMove.row+1,validMove.column+1,PLAYERS.X);
+        expect(view.updateBoard).toHaveBeenCalledWith(validMove.row,validMove.column,PLAYERS.X);
         expect(view.updatePlayer).toHaveBeenCalledWith(PLAYERS.O)
     });
 
@@ -53,7 +53,7 @@ describe('Tic tac toe game presenter', function(){
         playerX.move(0,0);
         playerO.move(inValidMove.row,inValidMove.column);
 
-        expect(view.updateBoard).not.toHaveBeenCalledWith([inValidMove.row+1,inValidMove.column+1,PLAYERS.O]);
+        expect(view.updateBoard).not.toHaveBeenCalledWith([inValidMove.row,inValidMove.column,PLAYERS.O]);
         expect(game.currentPlayer()).toBe(PLAYERS.O);
     });
 
