@@ -24,7 +24,7 @@ var GamePresenter = function(view){
         
         approveMove(row,column);
 
-        if(isWon()){
+        if(isMinimumMovesPeformedToCheckWin() && isWon()){
             winner = currentPlayer;
             status = this.status();
             return;
@@ -48,7 +48,7 @@ var GamePresenter = function(view){
         }
         return status;
     }
-    
+
     isValidPostion = function(row, column) {
         return isNaN(row) || isNaN(column);
     }
@@ -136,6 +136,10 @@ var GamePresenter = function(view){
     isMatchFound = function(sumOfMatchedMovesInRow, board, sumofMatchedMovesInColumn, sumOfMatchedMovesFromLeftToRight, sumOfMatchedMovesFromRightToLeft) {
         var requiredMovesToWin = board.length;
         return sumOfMatchedMovesInRow === requiredMovesToWin || sumofMatchedMovesInColumn === requiredMovesToWin || sumOfMatchedMovesFromLeftToRight === requiredMovesToWin || sumOfMatchedMovesFromRightToLeft === requiredMovesToWin;
+    }
+
+    isMinimumMovesPeformedToCheckWin = function(){
+        return moves > (board.length-1)*2;
     }
 }
 
