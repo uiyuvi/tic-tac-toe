@@ -19,7 +19,7 @@ var lastCharacter = function(string){
     return string.slice(-1);
 }
 const positions = document.querySelectorAll('.row span');
-for(var position = 0;position <= positions.length; position++){
+for(var position = 0;position < positions.length; position++){
     positions[position].addEventListener('click', function (event) {
         makeMove(event);
     })
