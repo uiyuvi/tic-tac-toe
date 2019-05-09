@@ -87,15 +87,19 @@ var GamePresenter = function(view){
                     sumOfMatchedMovesFromRightToLeft++;
                 }
 
-                if(sumOfMatchedMovesInRow === board.length || sumofMatchedMovesInColumn === board.length || sumOfMatchedMovesFromLeftToRight === board.length || sumOfMatchedMovesFromRightToLeft === board.length){                   
+                if(isMatchFound(sumOfMatchedMovesInRow, board, sumofMatchedMovesInColumn, sumOfMatchedMovesFromLeftToRight, sumOfMatchedMovesFromRightToLeft)){                   
                     return true;
                 }
             }
         }        
     }
+    
+    isCurrentPlayerPlayedOn  = function(row, column) {
+        return board[row][column] === currentPlayer;
+    }
 
     isMatchFoundInRow = function(row,column){
-        return isPlayedPosition(row,column) && board[row][column] === currentPlayer;
+        return isPlayedPosition(row,column) && isCurrentPlayerPlayedOn(row, column);
     }
 
     isMatchFoundInCloumn = function (row, column) {
@@ -103,12 +107,18 @@ var GamePresenter = function(view){
     }
 
     isMatchFoundInLeftToRightDiagonal = function(row, column){
-        return row === column && isPlayedPosition(row,column) && board[row][column] === currentPlayer;
+        return row === column && isPlayedPosition(row,column) && isCurrentPlayerPlayedOn(row, column);
     }
 
     isMatchFoundInRightToLeftDiagonal = function(row,column){
-        return ((row + column) === board.length-1) && isPlayedPosition(row,column) && board[row][column] === currentPlayer;
+        return ((row + column) === board.length-1) && isPlayedPosition(row,column) && isCurrentPlayerPlayedOn(row, column);
+    }
+    
+    isMatchFound = function(sumOfMatchedMovesInRow, board, sumofMatchedMovesInColumn, sumOfMatchedMovesFromLeftToRight, sumOfMatchedMovesFromRightToLeft) {
+        var requiredMovesToWin = board.length;
+        return sumOfMatchedMovesInRow === requiredMovesToWin || sumofMatchedMovesInColumn === requiredMovesToWin || sumOfMatchedMovesFromLeftToRight === requiredMovesToWin || sumOfMatchedMovesFromRightToLeft === requiredMovesToWin;
     }
 }
 
 module.exports = GamePresenter;
+
