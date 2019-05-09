@@ -1,6 +1,6 @@
 # Tic Tac Toe
 
-This is with 3 * 3 board and it can be scaled without adding logic.
+This is with 3 * 3 board and it can be scaled without adding logic by changing board size.
 
 ## About this Kata
 
