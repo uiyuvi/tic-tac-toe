@@ -1,7 +1,7 @@
-const GAME_STATUS = {
+const STATUS = {
     'IN_PROGRESS': 'In Progress',
     'WON': 'Won',
     'DRAW': 'Draw'
 }
 
-module.exports = GAME_STATUS;
+module.exports = STATUS;

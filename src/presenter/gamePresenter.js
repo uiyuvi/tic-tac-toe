@@ -1,5 +1,5 @@
 var PLAYERS = require('../constants/players');
-var GAME_STATUS = require('../constants/gameStatus');
+var GAME_STATUS = require('../constants/status');
 
 var GamePresenter = function(view){
     var currentPlayer = PLAYERS.X;

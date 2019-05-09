@@ -1,6 +1,6 @@
 var Game = require('../../src/presenter/gamePresenter');
 var PLAYERS = require('../../src/constants/players');
-var GAME_STATUS = require('../../src/constants/gameStatus');
+var STATUS = require('../../src/constants/status');
 
 describe('Tic tac toe game presenter', function(){
     var game;
@@ -69,7 +69,7 @@ describe('Tic tac toe game presenter', function(){
         expect(view.updateBoard.calls.count()).toEqual(5);
         expect(view.handleWon).toHaveBeenCalled();
         expect(game.winner()).toBe(PLAYERS.X);
-        expect(game.status()).toBe(GAME_STATUS.WON);
+        expect(game.status()).toBe(STATUS.WON);
     });
 
     it('should not allow player to play once game is declared win', function(){
@@ -97,7 +97,7 @@ describe('Tic tac toe game presenter', function(){
         expect(game.winner()).toBe(PLAYERS.X);
         expect(view.updateBoard.calls.count()).toEqual(5);
         expect(view.handleWon).toHaveBeenCalled();
-        expect(game.status()).toBe(GAME_STATUS.WON);
+        expect(game.status()).toBe(STATUS.WON);
     });
 
     it('should declare win if player draws all three in a diagonal from left to right', function(){
@@ -112,7 +112,7 @@ describe('Tic tac toe game presenter', function(){
         expect(game.winner()).toBe(PLAYERS.X);
         expect(view.updateBoard.calls.count()).toEqual(5);
         expect(view.handleWon).toHaveBeenCalled();
-        expect(game.status()).toBe(GAME_STATUS.WON);
+        expect(game.status()).toBe(STATUS.WON);
     });
 
     it('should declare win if player draws all three in a diagonal from right to left', function(){
@@ -132,7 +132,7 @@ describe('Tic tac toe game presenter', function(){
         expect(view.updateBoard.calls.count()).toEqual(5);
         expect(view.updateBoard.calls.mostRecent().args).toEqual([lastMove.row,lastMove.column,PLAYERS.X]);
         expect(view.handleWon).toHaveBeenCalled();
-        expect(game.status()).toBe(GAME_STATUS.WON);
+        expect(game.status()).toBe(STATUS.WON);
     });
     
 
@@ -149,7 +149,7 @@ describe('Tic tac toe game presenter', function(){
         playerO.move(2,0);
         playerX.move(1,2);
 
-        expect(game.status()).toBe(GAME_STATUS.DRAW);
+        expect(game.status()).toBe(STATUS.DRAW);
         expect(view.updateBoard.calls.count()).toEqual(9);
         expect(view.handleDraw).toHaveBeenCalled();
     });
