@@ -14,7 +14,7 @@ var GamePresenter = function(view){
     }
 
     this.move = function (row,column){
-        if(isNaN(row) || isNaN(column)){
+        if(isValidPostion(row, column)){
             return;
         }
 
@@ -47,6 +47,10 @@ var GamePresenter = function(view){
             view.handleDraw();
         }
         return status;
+    }
+    
+    isValidPostion = function(row, column) {
+        return isNaN(row) || isNaN(column);
     }
     
     isMovesExpired = function(){
@@ -136,4 +140,3 @@ var GamePresenter = function(view){
 }
 
 module.exports = GamePresenter;
-
