@@ -63,7 +63,8 @@ var GamePresenter = function(view){
 
     isWon = function(){
         var sumOfMatchedMovesInRow,
-        sumofMatchedMovesInColumn;
+            sumofMatchedMovesInColumn,
+            sumOfMatchedMovesFromLeftToRight =0;
 
         for(var row = 0; row < board.length ; row++){
             sumOfMatchedMovesInRow = 0;
@@ -77,7 +78,11 @@ var GamePresenter = function(view){
                     sumofMatchedMovesInColumn++;
                 }
 
-                if(sumOfMatchedMovesInRow === board.length || sumofMatchedMovesInColumn === board.length){                   
+                if(isMatchFoundInLeftToRightDiagonal(row,column) ){
+                    sumOfMatchedMovesFromLeftToRight++;
+                }
+
+                if(sumOfMatchedMovesInRow === board.length || sumofMatchedMovesInColumn === board.length || sumOfMatchedMovesFromLeftToRight === board.length){                   
                     return true;
                 }
             }
@@ -90,6 +95,10 @@ var GamePresenter = function(view){
 
     isMatchFoundInCloumn = function (row, column) {
         return typeof board[column][row] !== 'undefined' && board[column][row] === currentPlayer;
+    }
+
+    isMatchFoundInLeftToRightDiagonal = function(row, column){
+        return row === column && isPlayedPosition(row,column) && board[row][column] === currentPlayer;
     }
 }
 
