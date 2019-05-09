@@ -1,5 +1,7 @@
 # Tic Tac Toe
 
+This is with 3 * 3 board and it can be scaled without adding logic.
+
 ## About this Kata
 
 This is performed using **Test Driven Development** (TDD).
@@ -35,6 +37,6 @@ Inspired from [Udacity](https://udacity.github.io/git-styleguide/)
  - docs: changes to documentation (Readme file)
  - feat: a new feature with test case
  - fix: a bug fix
- - tyle: formatting, missing semi colons, etc.. no code change
+ - style: formatting, missing semi colons, etc.. no code change
  - refactor: refactoring production code
  - test: Refactoring test; no production code change 
