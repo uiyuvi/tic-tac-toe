@@ -4,34 +4,33 @@ var jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 
 describe('Tic Tac Toe game view', function(){
-    it('should update player', function(){
-        var view = new GameView();
-        const dom = new JSDOM(`<!DOCTYPE html><div id="currentPlayer">Hello world</div>`);
+    var view = new GameView();
+    var render = function(template){
+        const dom = new JSDOM(template);
         document = dom.window.document;
+    }
 
-        view.updatePlayer('X');
+    it('should update player', function(){        
+        render(`<!DOCTYPE html><div id="currentPlayer">Hello world</div>`);
 
-        expect(document.getElementById('currentPlayer').innerHTML).toBe('X');
+        view.updatePlayer(PLAYERS.X);
+
+        expect(document.getElementById('currentPlayer').innerHTML).toBe(PLAYERS.X);
     });
 
     it('should update board with player', function(){
-        var row = 2;
-        var column = 1;
-        var gameView = new GameView();
-        const dom = new JSDOM(`<!DOCTYPE html><div id="row${row}"><span class="column${column}">Hello world</span></div>`);
-        document = dom.window.document;
+        var row = 2, column = 1;
+        render(`<!DOCTYPE html><div id="row${row}"><span class="column${column}">Hello world</span></div>`);        
 
-        gameView.updateBoard(row,column,PLAYERS.O);
+        view.updateBoard(row,column,PLAYERS.O);
 
         expect(document.querySelector('#row' + row + ' .column' + column).innerHTML).toBe(PLAYERS.O);
     });
 
     it('should display winner', function(){
-        var gameView = new GameView();
-        const dom = new JSDOM(`<!DOCTYPE html><div class="win">Hello world</div>`);
-        document = dom.window.document;
+        render(`<!DOCTYPE html><div class="win">Hello world</div>`);
 
-        gameView.handleWon();
+        view.handleWon();
 
         expect(document.querySelector('.win').classList.contains('show')).toBeTruthy();
     });
