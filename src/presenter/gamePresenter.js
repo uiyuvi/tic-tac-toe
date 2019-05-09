@@ -62,23 +62,23 @@ var GamePresenter = function(view){
     }
 
     isWon = function(){
-        var sumOfMatchedMoveInRow;
+        var sumOfMatchedMovesInRow;
 
         for(var row = 0; row <= board.length-1 ; row++){
-            sumOfMatchedMoveInRow =0;
+            sumOfMatchedMovesInRow =0;
             for(var column = 0; column <= board.length-1; column++){
-                if(checkInRow(row, column)){
-                    sumOfMatchedMoveInRow++;
+                if(isMatchFoundInRow(row, column)){
+                    sumOfMatchedMovesInRow++;
                 }
 
-                if(sumOfMatchedMoveInRow === board.length){                   
+                if(sumOfMatchedMovesInRow === board.length){                   
                     return true;
                 }
             }
         }        
     }
 
-    checkInRow = function(row,column){
+    isMatchFoundInRow = function(row,column){
         return isPlayedPosition(row,column) && board[row][column] === currentPlayer;
     }
 }
