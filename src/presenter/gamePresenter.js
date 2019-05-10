@@ -14,11 +14,8 @@ var GamePresenter = function(view){
     }
 
     this.move = function (row,column){
-        if(isValidPostion(row, column)){
-            return;
-        }
 
-        if(isGameOver() || isPlayedPosition(row, column)){
+        if(isInValidPostion(row, column) || isGameOver() || isPlayedPosition(row, column)){
             return;
         }
         
@@ -49,7 +46,7 @@ var GamePresenter = function(view){
         return status;
     }
 
-    isValidPostion = function(row, column) {
+    isInValidPostion = function(row, column) {
         return isNaN(row) || isNaN(column);
     }
     
