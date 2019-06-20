@@ -10,9 +10,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/2019-SOW-DEV-011/tic-tac-toe.git"
+    "url": "https://github.com/uiyuvi/tic-tac-toe.git"
   },
-  "author": "2019-SOW-DEV-011",
+  "author": "uiyuvi",
   "license": "ISC",
   "devDependencies": {
     "jasmine": "^3.3.1",
