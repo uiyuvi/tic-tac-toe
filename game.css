@@ -1,0 +1,20 @@
+.gameBoard {
+    margin-top: 10px;
+    height: 375px;
+    width: 375px;
+    background-color: bisque;
+}
+.hide{
+    display: none;
+}
+.show{
+    display: inline-block;
+}
+.row span {
+    border: 2px solid brown;
+    font-size: 110px;
+    height: 120px;
+    width: 120px;
+    float: left;
+    text-align: center;
+}
